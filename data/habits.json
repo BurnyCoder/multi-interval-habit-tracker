@@ -200,7 +200,7 @@
       "intervalHistory": [
         {
           "effectiveDate": "2026-02-18",
-          "intervalDays": 5
+          "intervalDays": 10
         }
       ],
       "completionDates": [],
@@ -221,7 +221,7 @@
       "intervalHistory": [
         {
           "effectiveDate": "2026-02-18",
-          "intervalDays": 5
+          "intervalDays": 10
         }
       ],
       "completionDates": [],
@@ -242,7 +242,7 @@
       "intervalHistory": [
         {
           "effectiveDate": "2026-02-18",
-          "intervalDays": 5
+          "intervalDays": 10
         }
       ],
       "completionDates": [],
@@ -326,7 +326,7 @@
       "intervalHistory": [
         {
           "effectiveDate": "2026-02-18",
-          "intervalDays": 3
+          "intervalDays": 10
         }
       ],
       "completionDates": [],
