@@ -1,4 +1,4 @@
-# Habit Scoreboard (Browser UI + Local Backend)
+# Multi-Interval Habit Tracker
 
 Additional functionality to complement [Habitica](https://habitica.com/), a browser-based app for tracking habits that are completed on a recurring schedule (e.g. every N days), persisting data in your project folder via a local backend service.
 

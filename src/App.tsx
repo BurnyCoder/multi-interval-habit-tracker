@@ -186,7 +186,7 @@ function App() {
       <header className="panel top-bar">
         <div>
           <p className="eyebrow">Simulated Calendar</p>
-          <h1>Habit Scoreboard</h1>
+          <h1>Multi-Interval Habit Tracker</h1>
           <p className="date-label">Current date: {db.simulatedDate}</p>
         </div>
 
