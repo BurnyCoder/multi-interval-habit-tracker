@@ -101,15 +101,14 @@ function App() {
     () => new Map(dailyBreakdown.map((entry) => [entry.id, entry.delta])),
     [dailyBreakdown],
   )
-  const dailyChangedHabits = useMemo(
+  const dailyHabits = useMemo(
     () =>
       activeHabits
         .map((habit) => ({
           id: habit.id,
           name: habit.name,
           delta: dailyDeltaByHabitId.get(habit.id) ?? 0,
-        }))
-        .filter((habit) => habit.delta !== 0),
+        })),
     [activeHabits, dailyDeltaByHabitId],
   )
 
@@ -481,8 +480,8 @@ function App() {
       <section className="panel">
         <h2>Daily +/- Breakdown</h2>
         <p className="date-label">For {db.simulatedDate}</p>
-        {dailyChangedHabits.length === 0 ? (
-          <p className="empty-state">No +1 or -1 changes on this day.</p>
+        {dailyHabits.length === 0 ? (
+          <p className="empty-state">No active habits to show.</p>
         ) : (
           <table className="habit-table">
             <thead>
@@ -492,7 +491,7 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {dailyChangedHabits.map((habit) => (
+              {dailyHabits.map((habit) => (
                 <tr key={habit.id}>
                   <td>{habit.name}</td>
                   <td>
