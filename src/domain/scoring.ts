@@ -15,6 +15,12 @@ import type {
   IntervalChange,
 } from '../shared/types'
 
+export interface HabitDailyScoreChange {
+  id: string
+  name: string
+  delta: number
+}
+
 function assertIntervalDays(intervalDays: number): void {
   if (!Number.isInteger(intervalDays) || intervalDays < 1) {
     throw new Error('Interval must be an integer greater than or equal to 1')
@@ -319,6 +325,30 @@ export function computeAllHabitsView(dbFile: DbFile): HabitViewModel[] {
       }
 
       return a.name.localeCompare(b.name)
+    })
+}
+
+export function computeDailyScoreBreakdown(dbFile: DbFile, date: ISODate): HabitDailyScoreChange[] {
+  const previousDate = addDaysToIsoDate(date, -1)
+
+  return [...dbFile.habits]
+    .sort((a, b) => {
+      const byOrder = a.sortOrder - b.sortOrder
+      if (byOrder !== 0) {
+        return byOrder
+      }
+
+      return a.name.localeCompare(b.name)
+    })
+    .map((habit) => {
+      const previousScore = computeHabitView(habit, previousDate).cumulativeScore
+      const currentScore = computeHabitView(habit, date).cumulativeScore
+
+      return {
+        id: habit.id,
+        name: habit.name,
+        delta: currentScore - previousScore,
+      }
     })
 }
 

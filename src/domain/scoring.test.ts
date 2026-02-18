@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { addDaysToIsoDate } from './date'
 import {
   computeAllHabitsView,
+  computeDailyScoreBreakdown,
   computeHabitView,
   restoreHabitAtDate,
   toggleCompletionForDate,
@@ -159,5 +160,28 @@ describe('scoring engine', () => {
 
     const views = computeAllHabitsView(db)
     expect(views.map((view) => view.id)).toEqual(['a', 'b'])
+  })
+
+  it('returns +1 and -1 deltas for a given day', () => {
+    const db: DbFile = {
+      version: 1,
+      initializedAt: '2026-03-01',
+      simulatedDate: '2026-03-04',
+      habits: [
+        buildHabit({ id: 'plus', name: 'Plus Habit', sortOrder: 0, completionDates: ['2026-03-04'] }),
+        buildHabit({
+          id: 'minus',
+          name: 'Minus Habit',
+          sortOrder: 1,
+          intervalHistory: [{ effectiveDate: '2026-03-01', intervalDays: 1 }],
+        }),
+      ],
+    }
+
+    const breakdown = computeDailyScoreBreakdown(db, db.simulatedDate)
+    expect(breakdown).toEqual([
+      { id: 'plus', name: 'Plus Habit', delta: 1 },
+      { id: 'minus', name: 'Minus Habit', delta: -1 },
+    ])
   })
 })

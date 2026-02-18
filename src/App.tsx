@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { getHabitApi } from './api'
-import { computeAllHabitsView } from './domain/scoring'
+import { computeAllHabitsView, computeDailyScoreBreakdown } from './domain/scoring'
 import type { DbFile, HabitViewModel } from './shared/types'
 
 function scoreClassName(score: number): string {
@@ -32,8 +32,67 @@ function getErrorMessage(error: unknown): string {
   return 'Something went wrong.'
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;')
+}
+
+function renderBreakdownWindow(
+  reportWindow: Window,
+  simulatedDate: string,
+  plusOnes: string[],
+  minusOnes: string[],
+): void {
+  const plusList =
+    plusOnes.length > 0
+      ? plusOnes.map((name) => `<li>${escapeHtml(name)}</li>`).join('')
+      : '<li>No +1 habits on this day.</li>'
+  const minusList =
+    minusOnes.length > 0
+      ? minusOnes.map((name) => `<li>${escapeHtml(name)}</li>`).join('')
+      : '<li>No -1 habits on this day.</li>'
+
+  reportWindow.document.open()
+  reportWindow.document.write(`<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Daily Habit Score Breakdown</title>
+    <style>
+      body { font-family: "Segoe UI", sans-serif; margin: 18px; color: #1f2c20; background: #f3f5ef; }
+      h1 { margin: 0 0 6px; font-size: 1.35rem; }
+      .date { margin: 0 0 16px; color: #4f5f4e; }
+      .section { background: #fff; border: 1px solid #d2dbca; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+      .section h2 { margin: 0 0 10px; font-size: 1rem; }
+      .plus h2 { color: #12653f; }
+      .minus h2 { color: #8f261c; }
+      ul { margin: 0; padding-left: 20px; }
+      li { margin: 4px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Daily Score Breakdown</h1>
+    <p class="date">Date: ${escapeHtml(simulatedDate)}</p>
+    <section class="section plus">
+      <h2>+1 Habits</h2>
+      <ul>${plusList}</ul>
+    </section>
+    <section class="section minus">
+      <h2>-1 Habits</h2>
+      <ul>${minusList}</ul>
+    </section>
+  </body>
+</html>`)
+  reportWindow.document.close()
+}
+
 function App() {
   const habitApi = useMemo(() => getHabitApi(), [])
+  const reportWindowRef = useRef<Window | null>(null)
 
   const [db, setDb] = useState<DbFile | null>(null)
   const [loading, setLoading] = useState(true)
@@ -93,6 +152,18 @@ function App() {
 
   const activeHabits = views.filter((habit) => habit.isActiveOnSimulatedDate)
   const archivedHabits = views.filter((habit) => !habit.isActiveOnSimulatedDate)
+  const dailyBreakdown = useMemo(
+    () => (db ? computeDailyScoreBreakdown(db, db.simulatedDate) : []),
+    [db],
+  )
+  const plusOneHabits = useMemo(
+    () => dailyBreakdown.filter((entry) => entry.delta > 0).map((entry) => entry.name),
+    [dailyBreakdown],
+  )
+  const minusOneHabits = useMemo(
+    () => dailyBreakdown.filter((entry) => entry.delta < 0).map((entry) => entry.name),
+    [dailyBreakdown],
+  )
 
   const runMutation = async (operation: () => Promise<DbFile>) => {
     try {
@@ -144,6 +215,48 @@ function App() {
     await runMutation(() => habitApi.habit.reorder(habitId, direction, db.simulatedDate))
   }
 
+  const openDailyBreakdownWindow = () => {
+    if (!db) {
+      return
+    }
+
+    const existingWindow = reportWindowRef.current
+    const reportWindow = existingWindow && !existingWindow.closed
+      ? existingWindow
+      : window.open('', 'habit-day-score-breakdown', 'width=540,height=700')
+
+    if (!reportWindow) {
+      setRuntimeError('Popup was blocked. Allow popups to view the daily score breakdown window.')
+      return
+    }
+
+    reportWindowRef.current = reportWindow
+    renderBreakdownWindow(reportWindow, db.simulatedDate, plusOneHabits, minusOneHabits)
+    reportWindow.focus()
+  }
+
+  useEffect(() => {
+    if (!db) {
+      return
+    }
+
+    const reportWindow = reportWindowRef.current
+    if (!reportWindow || reportWindow.closed) {
+      return
+    }
+
+    renderBreakdownWindow(reportWindow, db.simulatedDate, plusOneHabits, minusOneHabits)
+  }, [db, plusOneHabits, minusOneHabits])
+
+  useEffect(() => {
+    return () => {
+      const reportWindow = reportWindowRef.current
+      if (reportWindow && !reportWindow.closed) {
+        reportWindow.close()
+      }
+    }
+  }, [])
+
   if (loading) {
     return (
       <main className="app-shell">
@@ -173,6 +286,13 @@ function App() {
         </div>
 
         <div className="date-actions">
+          <button
+            type="button"
+            className="button"
+            onClick={openDailyBreakdownWindow}
+          >
+            Daily +/- Window
+          </button>
           <button
             type="button"
             className="button button-primary"
