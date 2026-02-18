@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "initializedAt": "2026-02-18",
+  "simulatedDate": "2026-02-18",
+  "habits": [
+    {
+      "id": "6a114c17-8143-410b-8eee-c35c6874231f",
+      "name": "Resting day",
+      "sortOrder": 0,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "77487a17-b24b-4295-a53c-160c9179e4f5",
+      "name": "Foundational formal learning lectures books at least hour",
+      "sortOrder": 1,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "39b8d31f-3419-4122-b7e9-4f20963386b9",
+      "name": "Nonfoundational learning (stuff like Claude Code docs) at least hour",
+      "sortOrder": 2,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "f55adfa6-821d-4874-85b3-626015689344",
+      "name": "Read paper directly at least hour",
+      "sortOrder": 3,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "2e02901b-e534-4cd2-9dff-23376240aca5",
+      "name": "Read paper indirectly/summary/skimming every at least hour",
+      "sortOrder": 4,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "91479d18-04bc-4095-8536-293e5418b46c",
+      "name": "Do research project at least hour",
+      "sortOrder": 5,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    }
+  ]
+}
