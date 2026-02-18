@@ -33,6 +33,14 @@ Additional functionality to complement [Habitica](https://habitica.com/), a brow
 - Express + TypeScript (local backend)
 - JSON file persistence on disk (`data/habits.json`)
 
+## Windows Desktop Shortcut (WSL)
+
+Copy `start.bat` to your Windows desktop to launch the app with a double-click. It starts both servers in WSL and opens the browser automatically.
+
+```
+cp start.bat /mnt/c/Users/<YourUser>/Desktop/
+```
+
 ## Development
 
 ```bash
