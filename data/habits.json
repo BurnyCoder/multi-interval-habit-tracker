@@ -130,9 +130,114 @@
       "archivedAt": null
     },
     {
+      "id": "09c0d583-ff70-473b-b6c9-9f701085ea84",
+      "name": "Mathematical exercise or proof by myself from formal learning or math academy or random YouTube math sorcerer",
+      "sortOrder": 6,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "bb577f65-68e8-4699-b3c2-1423c35d3252",
+      "name": "Something like Kaggle or Leetcode or DeepML or TensorTonic or exercises from classes task for at least hour",
+      "sortOrder": 7,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "f2ae949d-f88f-47e0-996c-108d54764d85",
+      "name": "Engineering project at least hour",
+      "sortOrder": 8,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "4100b751-b11c-4dba-bf6c-902f50dece4c",
+      "name": "Play with library at least hour",
+      "sortOrder": 9,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "ce9da50c-85f2-4e4c-a8be-27eae7dace73",
+      "name": "Train model",
+      "sortOrder": 10,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
       "id": "2f3cdbf4-b6b8-49e9-9da5-2c1d967fe9fb",
       "name": "Expand obsidian at least hour",
-      "sortOrder": 6,
+      "sortOrder": 11,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
@@ -153,7 +258,7 @@
     {
       "id": "a6896815-94ad-406e-b6f0-23753e2a8c40",
       "name": "MLST something at least hour",
-      "sortOrder": 7,
+      "sortOrder": 12,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
@@ -174,7 +279,7 @@
     {
       "id": "46383dca-3f43-425f-ac7e-4fc081319c0a",
       "name": "Mechinterp wiki at least hour",
-      "sortOrder": 8,
+      "sortOrder": 13,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
@@ -195,7 +300,7 @@
     {
       "id": "8f1d0a01-b7eb-4158-b460-98df68fcae33",
       "name": "Read audiobook like methods of rationality at least hour",
-      "sortOrder": 9,
+      "sortOrder": 14,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
@@ -214,9 +319,93 @@
       "archivedAt": null
     },
     {
+      "id": "b1a32f1c-c4fa-4719-a0d6-3f50f37cbec6",
+      "name": "Socialize",
+      "sortOrder": 15,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 3
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "d1a07da8-aca5-4883-9098-fa0b8bb62236",
+      "name": "Send PM",
+      "sortOrder": 16,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "98b6adb0-9a4c-4afb-9cf0-c79ca9ca503b",
+      "name": "Send PM or call someone not someone concrete",
+      "sortOrder": 17,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "5024600f-47ca-46f2-b257-e9d9f9e507b9",
+      "name": "Do something on todo list",
+      "sortOrder": 18,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
       "id": "dbd4b488-3320-4afc-ada4-82452c2c6508",
       "name": "Long excercise at least hour",
-      "sortOrder": 10,
+      "sortOrder": 19,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
@@ -237,7 +426,7 @@
     {
       "id": "2a4fb84c-cd2e-4670-99ef-601b954d25ed",
       "name": "Shower",
-      "sortOrder": 11,
+      "sortOrder": 20,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
@@ -258,7 +447,7 @@
     {
       "id": "314d789d-0f8c-4662-853d-60de8732b462",
       "name": "Cold shower",
-      "sortOrder": 12,
+      "sortOrder": 21,
       "createdAt": "2026-02-18",
       "intervalHistory": [
         {
