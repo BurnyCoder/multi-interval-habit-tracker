@@ -1,6 +1,6 @@
 # Habit Scoreboard (Browser UI + Local Backend)
 
-Additional functionality to complement [Habitica](https://habitica.com/) — a browser-based habit tracker that persists data in your project folder via a local backend service.
+Additional functionality to complement [Habitica](https://habitica.com/), a browser-based habit tracker that persists data in your project folder via a local backend service.
 
 ## Persistence location
 
@@ -23,7 +23,7 @@ Additional functionality to complement [Habitica](https://habitica.com/) — a b
   - archived habits stop accruing score
   - restoring starts a fresh cycle at restore date
 - Reorder habits with Up/Down controls in both Active and Archived lists.
-- Open a separate daily breakdown window showing which habits got `+1` and `-1` for the current simulated day.
+- View a daily breakdown at the bottom of the main page showing which habits got `+1` and `-1` for the current simulated day.
 
 ## Stack
 
