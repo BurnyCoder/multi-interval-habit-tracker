@@ -128,6 +128,153 @@
       ],
       "status": "active",
       "archivedAt": null
+    },
+    {
+      "id": "2f3cdbf4-b6b8-49e9-9da5-2c1d967fe9fb",
+      "name": "Expand obsidian at least hour",
+      "sortOrder": 6,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "a6896815-94ad-406e-b6f0-23753e2a8c40",
+      "name": "MLST something at least hour",
+      "sortOrder": 7,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 10
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "46383dca-3f43-425f-ac7e-4fc081319c0a",
+      "name": "Mechinterp wiki at least hour",
+      "sortOrder": 8,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 5
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "8f1d0a01-b7eb-4158-b460-98df68fcae33",
+      "name": "Read audiobook like methods of rationality at least hour",
+      "sortOrder": 9,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 15
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "dbd4b488-3320-4afc-ada4-82452c2c6508",
+      "name": "Long excercise at least hour",
+      "sortOrder": 10,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 3
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "2a4fb84c-cd2e-4670-99ef-601b954d25ed",
+      "name": "Shower",
+      "sortOrder": 11,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 3
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
+    },
+    {
+      "id": "314d789d-0f8c-4662-853d-60de8732b462",
+      "name": "Cold shower",
+      "sortOrder": 12,
+      "createdAt": "2026-02-18",
+      "intervalHistory": [
+        {
+          "effectiveDate": "2026-02-18",
+          "intervalDays": 7
+        }
+      ],
+      "completionDates": [],
+      "activePeriods": [
+        {
+          "startDate": "2026-02-18",
+          "endDate": null
+        }
+      ],
+      "status": "active",
+      "archivedAt": null
     }
   ]
 }
