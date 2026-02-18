@@ -37,6 +37,8 @@ Additional functionality to complement [Habitica](https://habitica.com/), a brow
 
 Copy `start.bat` to your Windows desktop to launch the app with a double-click. It starts both servers in WSL and opens the browser automatically.
 
+Edit the path inside `start.bat` to match where you cloned the repo.
+
 ```
 cp start.bat /mnt/c/Users/<YourUser>/Desktop/
 ```
