@@ -109,6 +109,21 @@ app.post('/api/habits/:id/restore', async (req, res) => {
   }
 })
 
+app.post('/api/habits/:id/reorder', async (req, res) => {
+  try {
+    const direction = req.body?.direction
+    if (direction !== 'up' && direction !== 'down') {
+      res.status(400).json({ error: 'Invalid direction. Use "up" or "down".' })
+      return
+    }
+
+    const db = await store.reorderHabit(req.params.id, direction, req.body?.date)
+    res.json(db)
+  } catch (error) {
+    sendError(error, res)
+  }
+})
+
 app.delete('/api/habits/:id', async (req, res) => {
   try {
     const db = await store.deletePermanent(req.params.id)

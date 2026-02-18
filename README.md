@@ -1,6 +1,6 @@
 # Habit Scoreboard (Browser UI + Local Backend)
 
-A browser-based habit tracker that persists data in your project folder via a local backend service.
+Additional functionality to complement [Habitica](https://habitica.com/) — a browser-based habit tracker that persists data in your project folder via a local backend service.
 
 ## Persistence location
 
@@ -22,6 +22,7 @@ A browser-based habit tracker that persists data in your project folder via a lo
 - Archive/restore habits:
   - archived habits stop accruing score
   - restoring starts a fresh cycle at restore date
+- Reorder habits with Up/Down controls in both Active and Archived lists.
 
 ## Stack
 

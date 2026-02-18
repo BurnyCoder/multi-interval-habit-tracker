@@ -136,6 +136,14 @@ function App() {
     })
   }
 
+  const onReorderHabit = async (habitId: string, direction: 'up' | 'down') => {
+    if (!db) {
+      return
+    }
+
+    await runMutation(() => habitApi.habit.reorder(habitId, direction, db.simulatedDate))
+  }
+
   if (loading) {
     return (
       <main className="app-shell">
@@ -248,8 +256,10 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {activeHabits.map((habit) => {
+              {activeHabits.map((habit, index) => {
                 const editing = editingHabitId === habit.id
+                const canMoveUp = index > 0
+                const canMoveDown = index < activeHabits.length - 1
 
                 return (
                   <tr key={habit.id}>
@@ -274,6 +284,26 @@ function App() {
                       </span>
                     </td>
                     <td className="actions-cell">
+                      <button
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          void onReorderHabit(habit.id, 'up')
+                        }}
+                        disabled={!canMoveUp}
+                      >
+                        Up
+                      </button>
+                      <button
+                        type="button"
+                        className="button"
+                        onClick={() => {
+                          void onReorderHabit(habit.id, 'down')
+                        }}
+                        disabled={!canMoveDown}
+                      >
+                        Down
+                      </button>
                       <button
                         type="button"
                         className="button"
@@ -361,7 +391,11 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              {archivedHabits.map((habit) => (
+              {archivedHabits.map((habit, index) => {
+                const canMoveUp = index > 0
+                const canMoveDown = index < archivedHabits.length - 1
+
+                return (
                 <tr key={habit.id}>
                   <td>{habit.name}</td>
                   <td>{habit.archivedAt ?? 'Unknown'}</td>
@@ -371,6 +405,26 @@ function App() {
                     </span>
                   </td>
                   <td className="actions-cell">
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={() => {
+                        void onReorderHabit(habit.id, 'up')
+                      }}
+                      disabled={!canMoveUp}
+                    >
+                      Up
+                    </button>
+                    <button
+                      type="button"
+                      className="button"
+                      onClick={() => {
+                        void onReorderHabit(habit.id, 'down')
+                      }}
+                      disabled={!canMoveDown}
+                    >
+                      Down
+                    </button>
                     <button
                       type="button"
                       className="button"
@@ -398,7 +452,8 @@ function App() {
                     </button>
                   </td>
                 </tr>
-              ))}
+                )
+              })}
             </tbody>
           </table>
         )}

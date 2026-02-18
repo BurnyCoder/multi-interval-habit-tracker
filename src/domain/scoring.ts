@@ -89,9 +89,12 @@ export function normalizeActivePeriods(activePeriods: ActivePeriod[]): ActivePer
 }
 
 export function normalizeHabit(habit: Habit): Habit {
+  const sortOrder = Number.isInteger(habit.sortOrder) && habit.sortOrder >= 0 ? habit.sortOrder : 0
+
   return {
     ...habit,
     name: habit.name.trim(),
+    sortOrder,
     intervalHistory: normalizeIntervalHistory(habit.intervalHistory),
     completionDates: normalizeCompletionDates(habit.completionDates),
     activePeriods: normalizeActivePeriods(habit.activePeriods),
@@ -298,12 +301,21 @@ export function computeHabitView(rawHabit: Habit, simulatedDate: ISODate): Habit
 }
 
 export function computeAllHabitsView(dbFile: DbFile): HabitViewModel[] {
+  const sortOrderById = new Map(dbFile.habits.map((habit) => [habit.id, habit.sortOrder]))
+
   return dbFile.habits
     .map((habit) => computeHabitView(habit, dbFile.simulatedDate))
     .sort((a, b) => {
       const activeRank = Number(b.isActiveOnSimulatedDate) - Number(a.isActiveOnSimulatedDate)
       if (activeRank !== 0) {
         return activeRank
+      }
+
+      const orderA = sortOrderById.get(a.id) ?? 0
+      const orderB = sortOrderById.get(b.id) ?? 0
+      const orderRank = orderA - orderB
+      if (orderRank !== 0) {
+        return orderRank
       }
 
       return a.name.localeCompare(b.name)

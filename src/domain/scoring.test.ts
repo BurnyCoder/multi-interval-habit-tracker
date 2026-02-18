@@ -1,16 +1,18 @@
 import { describe, expect, it } from 'vitest'
 import { addDaysToIsoDate } from './date'
 import {
+  computeAllHabitsView,
   computeHabitView,
   restoreHabitAtDate,
   toggleCompletionForDate,
 } from './scoring'
-import type { Habit } from '../shared/types'
+import type { DbFile, Habit } from '../shared/types'
 
 function buildHabit(partial: Partial<Habit> = {}): Habit {
   return {
     id: 'habit-1',
     name: 'Exercise',
+    sortOrder: 0,
     createdAt: '2026-03-01',
     intervalHistory: [{ effectiveDate: '2026-03-01', intervalDays: 5 }],
     completionDates: [],
@@ -142,5 +144,20 @@ describe('scoring engine', () => {
     expect(view.cumulativeScore).toBe(0)
     expect(view.daysElapsed).toBe(2)
     expect(view.isActiveOnSimulatedDate).toBe(true)
+  })
+
+  it('uses sortOrder when listing habits', () => {
+    const db: DbFile = {
+      version: 1,
+      initializedAt: '2026-03-01',
+      simulatedDate: '2026-03-01',
+      habits: [
+        buildHabit({ id: 'b', name: 'B', sortOrder: 1 }),
+        buildHabit({ id: 'a', name: 'A', sortOrder: 0 }),
+      ],
+    }
+
+    const views = computeAllHabitsView(db)
+    expect(views.map((view) => view.id)).toEqual(['a', 'b'])
   })
 })

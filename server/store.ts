@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto'
 import { addDaysToIsoDate, isValidIsoDate, todayIsoDate } from '../src/domain/date'
 import {
   archiveHabitAtDate,
+  isHabitActiveOnDate,
   normalizeHabit,
   restoreHabitAtDate,
   syncHabitStatusAtDate,
@@ -70,7 +71,7 @@ function parseActivePeriod(raw: unknown): Habit['activePeriods'][number] {
   }
 }
 
-function parseHabit(raw: unknown): Habit {
+function parseHabit(raw: unknown, fallbackSortOrder: number): Habit {
   if (!isRecord(raw)) {
     throw new Error('Invalid habit entry')
   }
@@ -82,6 +83,11 @@ function parseHabit(raw: unknown): Habit {
   if (typeof raw.name !== 'string' || raw.name.trim().length === 0) {
     throw new Error('Invalid habit name')
   }
+
+  const sortOrder =
+    typeof raw.sortOrder === 'number' && Number.isInteger(raw.sortOrder) && raw.sortOrder >= 0
+      ? raw.sortOrder
+      : fallbackSortOrder
 
   if (typeof raw.createdAt !== 'string' || !isValidIsoDate(raw.createdAt)) {
     throw new Error('Invalid habit createdAt')
@@ -114,6 +120,7 @@ function parseHabit(raw: unknown): Habit {
   return {
     id: raw.id,
     name: raw.name,
+    sortOrder,
     createdAt: raw.createdAt,
     intervalHistory: raw.intervalHistory.map(parseIntervalChange),
     completionDates: raw.completionDates,
@@ -148,7 +155,7 @@ function parseDb(raw: unknown): DbFile {
     version: 1,
     initializedAt: raw.initializedAt,
     simulatedDate: raw.simulatedDate,
-    habits: raw.habits.map(parseHabit),
+    habits: raw.habits.map((habit, index) => parseHabit(habit, index)),
   }
 }
 
@@ -161,10 +168,28 @@ function createDefaultDb(date: ISODate): DbFile {
   }
 }
 
+function normalizeSortOrder(habits: Habit[]): Habit[] {
+  return [...habits]
+    .sort((a, b) => {
+      const byOrder = a.sortOrder - b.sortOrder
+      if (byOrder !== 0) {
+        return byOrder
+      }
+
+      return a.name.localeCompare(b.name)
+    })
+    .map((habit, index) => ({
+      ...habit,
+      sortOrder: index,
+    }))
+}
+
 function normalizeDb(rawDb: DbFile): DbFile {
   return {
     ...rawDb,
-    habits: rawDb.habits.map((habit) => syncHabitStatusAtDate(normalizeHabit(habit), rawDb.simulatedDate)),
+    habits: normalizeSortOrder(
+      rawDb.habits.map((habit) => syncHabitStatusAtDate(normalizeHabit(habit), rawDb.simulatedDate)),
+    ),
   }
 }
 
@@ -212,7 +237,9 @@ export class HabitStore {
 
   private syncStatuses(): void {
     const db = this.ensureDb()
-    db.habits = db.habits.map((habit) => syncHabitStatusAtDate(habit, db.simulatedDate))
+    db.habits = normalizeSortOrder(
+      db.habits.map((habit) => syncHabitStatusAtDate(habit, db.simulatedDate)),
+    )
   }
 
   private assertIsoDate(date: string, fieldName: string): asserts date is ISODate {
@@ -305,10 +332,12 @@ export class HabitStore {
     return this.withLock(async () => {
       const db = this.ensureDb()
       const today = db.simulatedDate
+      const nextSortOrder = db.habits.length
 
       const habit: Habit = {
         id: randomUUID(),
         name: normalizedName,
+        sortOrder: nextSortOrder,
         createdAt: today,
         intervalHistory: [{ effectiveDate: today, intervalDays }],
         completionDates: [],
@@ -381,6 +410,44 @@ export class HabitStore {
       }
 
       this.ensureDb().habits[habitIndex] = restoreHabitAtDate(this.ensureDb().habits[habitIndex], date)
+      return this.commit()
+    })
+  }
+
+  async reorderHabit(id: string, direction: 'up' | 'down', date: string): Promise<DbFile> {
+    this.assertIsoDate(date, 'date')
+
+    return this.withLock(async () => {
+      const db = this.ensureDb()
+      const targetIndex = this.findHabitIndex(id)
+      if (targetIndex < 0) {
+        throw new Error('Habit not found')
+      }
+
+      const targetHabit = db.habits[targetIndex]
+      const targetActiveState = isHabitActiveOnDate(targetHabit, date)
+
+      const scopedHabits = db.habits
+        .filter((habit) => isHabitActiveOnDate(habit, date) === targetActiveState)
+        .sort((a, b) => a.sortOrder - b.sortOrder)
+
+      const currentPosition = scopedHabits.findIndex((habit) => habit.id === id)
+      if (currentPosition < 0) {
+        throw new Error('Habit not found in reorder scope')
+      }
+
+      const swapPosition = direction === 'up' ? currentPosition - 1 : currentPosition + 1
+      if (swapPosition < 0 || swapPosition >= scopedHabits.length) {
+        return cloneDb(db)
+      }
+
+      const currentHabit = scopedHabits[currentPosition]
+      const swapHabit = scopedHabits[swapPosition]
+      const currentSortOrder = currentHabit.sortOrder
+
+      currentHabit.sortOrder = swapHabit.sortOrder
+      swapHabit.sortOrder = currentSortOrder
+
       return this.commit()
     })
   }

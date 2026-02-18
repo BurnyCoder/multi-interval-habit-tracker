@@ -15,6 +15,7 @@ export type HabitStatus = 'active' | 'archived'
 export interface Habit {
   id: string
   name: string
+  sortOrder: number
   createdAt: ISODate
   intervalHistory: IntervalChange[]
   completionDates: ISODate[]

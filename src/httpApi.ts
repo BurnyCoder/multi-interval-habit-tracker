@@ -68,6 +68,8 @@ export const httpHabitApi: HabitApi = {
       requestJson<DbFile>(`/api/habits/${id}/toggle-completion`, withBody({ date })),
     archive: async (id, date) => requestJson<DbFile>(`/api/habits/${id}/archive`, withBody({ date })),
     restore: async (id, date) => requestJson<DbFile>(`/api/habits/${id}/restore`, withBody({ date })),
+    reorder: async (id, direction, date) =>
+      requestJson<DbFile>(`/api/habits/${id}/reorder`, withBody({ direction, date })),
     deletePermanent: async (id) => requestJson<DbFile>(`/api/habits/${id}`, { method: 'DELETE' }),
   },
 }

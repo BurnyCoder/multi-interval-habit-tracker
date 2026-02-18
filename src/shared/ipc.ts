@@ -11,6 +11,7 @@ export const IPC_CHANNELS = {
   habitArchive: 'habit.archive',
   habitRestore: 'habit.restore',
   habitDeletePermanent: 'habit.deletePermanent',
+  habitReorder: 'habit.reorder',
 } as const
 
 export interface HabitApi {
@@ -29,5 +30,6 @@ export interface HabitApi {
     archive: (id: string, date: ISODate) => Promise<DbFile>
     restore: (id: string, date: ISODate) => Promise<DbFile>
     deletePermanent: (id: string) => Promise<DbFile>
+    reorder: (id: string, direction: 'up' | 'down', date: ISODate) => Promise<DbFile>
   }
 }
