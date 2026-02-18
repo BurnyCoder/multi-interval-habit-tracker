@@ -23,7 +23,7 @@ Additional functionality to complement [Habitica](https://habitica.com/), a brow
   - archived habits stop accruing score
   - restoring starts a fresh cycle at restore date
 - Reorder habits with Up/Down controls in both Active and Archived lists.
-- View a daily breakdown at the bottom of the main page showing which habits got `+1` and `-1` for the current simulated day.
+- View a single daily breakdown table at the bottom of the main page showing `+1` and `-1` habits in Active Habits order.
 
 ## Stack
 

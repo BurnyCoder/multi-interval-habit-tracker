@@ -97,13 +97,20 @@ function App() {
     () => (db ? computeDailyScoreBreakdown(db, db.simulatedDate) : []),
     [db],
   )
-  const plusOneHabits = useMemo(
-    () => dailyBreakdown.filter((entry) => entry.delta > 0).map((entry) => entry.name),
+  const dailyDeltaByHabitId = useMemo(
+    () => new Map(dailyBreakdown.map((entry) => [entry.id, entry.delta])),
     [dailyBreakdown],
   )
-  const minusOneHabits = useMemo(
-    () => dailyBreakdown.filter((entry) => entry.delta < 0).map((entry) => entry.name),
-    [dailyBreakdown],
+  const dailyChangedHabits = useMemo(
+    () =>
+      activeHabits
+        .map((habit) => ({
+          id: habit.id,
+          name: habit.name,
+          delta: dailyDeltaByHabitId.get(habit.id) ?? 0,
+        }))
+        .filter((habit) => habit.delta !== 0),
+    [activeHabits, dailyDeltaByHabitId],
   )
 
   const runMutation = async (operation: () => Promise<DbFile>) => {
@@ -474,32 +481,28 @@ function App() {
       <section className="panel">
         <h2>Daily +/- Breakdown</h2>
         <p className="date-label">For {db.simulatedDate}</p>
-        <div className="daily-breakdown-grid">
-          <div className="daily-breakdown-card daily-breakdown-plus">
-            <h3>+1 Habits</h3>
-            {plusOneHabits.length === 0 ? (
-              <p className="empty-state">No +1 habits on this day.</p>
-            ) : (
-              <ul className="daily-breakdown-list">
-                {plusOneHabits.map((habitName, index) => (
-                  <li key={`plus-${habitName}-${index}`}>{habitName}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-          <div className="daily-breakdown-card daily-breakdown-minus">
-            <h3>-1 Habits</h3>
-            {minusOneHabits.length === 0 ? (
-              <p className="empty-state">No -1 habits on this day.</p>
-            ) : (
-              <ul className="daily-breakdown-list">
-                {minusOneHabits.map((habitName, index) => (
-                  <li key={`minus-${habitName}-${index}`}>{habitName}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
+        {dailyChangedHabits.length === 0 ? (
+          <p className="empty-state">No +1 or -1 changes on this day.</p>
+        ) : (
+          <table className="habit-table">
+            <thead>
+              <tr>
+                <th>Habit</th>
+                <th>Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              {dailyChangedHabits.map((habit) => (
+                <tr key={habit.id}>
+                  <td>{habit.name}</td>
+                  <td>
+                    <span className={scoreClassName(habit.delta)}>{formatScore(habit.delta)}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </section>
     </main>
   )

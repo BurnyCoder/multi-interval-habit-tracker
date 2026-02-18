@@ -229,41 +229,6 @@ input:focus {
   font-size: 1.1rem;
 }
 
-.daily-breakdown-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.9rem;
-}
-
-.daily-breakdown-card {
-  border: 1px solid #dbe4d3;
-  border-radius: 10px;
-  padding: 0.75rem 0.9rem;
-  background: #fdfefc;
-}
-
-.daily-breakdown-card h3 {
-  margin: 0 0 0.5rem;
-  font-size: 0.96rem;
-}
-
-.daily-breakdown-plus h3 {
-  color: var(--positive);
-}
-
-.daily-breakdown-minus h3 {
-  color: var(--negative);
-}
-
-.daily-breakdown-list {
-  margin: 0;
-  padding-left: 1.1rem;
-}
-
-.daily-breakdown-list li {
-  margin: 0.3rem 0;
-}
-
 @media (max-width: 980px) {
   .top-bar {
     flex-direction: column;
@@ -275,10 +240,6 @@ input:focus {
   }
 
   .add-form {
-    grid-template-columns: 1fr;
-  }
-
-  .daily-breakdown-grid {
     grid-template-columns: 1fr;
   }
 }
