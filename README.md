@@ -1,6 +1,6 @@
 # Multi-Interval Habit Tracker
 
-Additional functionality to complement [Habitica](https://habitica.com/), a browser-based app for tracking habits that are completed on a recurring schedule (e.g. every N days), persisting data in your project folder via a local backend service.
+A browser-based app for tracking habits that are completed on a recurring schedule (e.g. every N days), built as additional functionality to complement [Habitica](https://habitica.com/). It runs standalone (it does not connect to a Habitica account or API) and persists data in your project folder via a local backend service.
 
 <img width="2026" height="1121" alt="image" src="https://github.com/user-attachments/assets/f3141bfa-39e6-4e82-befb-4b56275347a0" />
 
@@ -20,10 +20,10 @@ Additional functionality to complement [Habitica](https://habitica.com/), a brow
 - Cycle resets to Day 0 on every completion.
 - Simulated date controls:
   - `Next Day`
-  - `Jump to Date` (past/future)
+  - `Jump to date` (past/future)
 - Archive/restore habits:
-  - archived habits stop accruing score
-  - restoring starts a fresh cycle at restore date
+  - archived habits stop accruing score after the archive date (the archive date itself still counts, and the habit stays in the Active list until the simulated date moves past it)
+  - restoring starts a fresh cycle at restore date, except when restoring on the day right after the archive date: the two active periods are then merged and the previous cycle, including any overdue days, continues
 - Reorder habits with Up/Down controls in both Active and Archived lists.
 - View a single daily breakdown table at the bottom of the main page showing all active habits (`+1`, `-1`, or `0`) in Active Habits order.
 
