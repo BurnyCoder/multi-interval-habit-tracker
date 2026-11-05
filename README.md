@@ -20,10 +20,10 @@ A browser-based app for tracking habits that are completed on a recurring schedu
 - Cycle resets to Day 0 on every completion.
 - Simulated date controls:
   - `Next Day`
-  - `Jump to Date` (past/future)
+  - `Jump to date` (past/future)
 - Archive/restore habits:
-  - archived habits stop accruing score
-  - restoring starts a fresh cycle at restore date
+  - archived habits stop accruing score after the archive date (the archive date itself still counts, and the habit stays in the Active list until the simulated date moves past it)
+  - restoring starts a fresh cycle at restore date, except when restoring on the day right after the archive date: the two active periods are then merged and the previous cycle, including any overdue days, continues
 - Reorder habits with Up/Down controls in both Active and Archived lists.
 - View a single daily breakdown table at the bottom of the main page showing all active habits (`+1`, `-1`, or `0`) in Active Habits order.
 
