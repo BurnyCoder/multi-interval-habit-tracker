@@ -1,6 +1,6 @@
 # Multi-Interval Habit Tracker
 
-Additional functionality to complement [Habitica](https://habitica.com/), a browser-based app for tracking habits that are completed on a recurring schedule (e.g. every N days), persisting data in your project folder via a local backend service.
+A browser-based app for tracking habits that are completed on a recurring schedule (e.g. every N days), built as additional functionality to complement [Habitica](https://habitica.com/). It runs standalone (it does not connect to a Habitica account or API) and persists data in your project folder via a local backend service.
 
 <img width="2026" height="1121" alt="image" src="https://github.com/user-attachments/assets/f3141bfa-39e6-4e82-befb-4b56275347a0" />
 
